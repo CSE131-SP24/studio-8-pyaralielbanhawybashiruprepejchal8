@@ -3,13 +3,24 @@ package studio8;
 public class SelectAllQuestion extends MultipleChoiceQuestion {
 
 	public SelectAllQuestion(String prompt, String answer, String[] choices) {
+		super(prompt,answer,choices.length, choices);
+		
 		//Hint: 1 point per choice
 		//FIXME
 	}
-	
+	@Override
 	public int checkAnswer(String givenAnswer) {
+		// need to use super if we want to call an instance variable from an other class
+		int dumpoints=0;
+		for(int i=0; i < super.getChoices().length; i++) {
+			if(givenAnswer.contains(super.getChoices()[i])) {
+				dumpoints++;
+			}
+			
+		}
+		
 		//FIXME Should return partial credit (if earned)!
-		return 0;
+		return dumpoints;
 	}
 
 	private int findMissingCorrectAnswers(String givenAnswer) {
